@@ -8,13 +8,13 @@ app = Flask(__name__)
 PWD_ALPHABET = f"{digits}{ascii_letters}{punctuation}"
 
 
-@app.route('/', methods=['get'])
+@app.route('/requirements/', methods=['get'])
 def return_content():
     with open("requirements/requirements.txt", encoding='utf-8') as req:
         return req.read()
 
 
-@app.route('/users', methods=['get', 'post'])
+@app.route('/generate-users/', methods=['get', 'post'])
 def generate_users():
     context = {'users': []}
     if request.method == 'POST':
@@ -29,7 +29,7 @@ def generate_users():
     return render_template('generate_users.html', **context)
 
 
-@app.route('/astronauts', methods=['get'])
+@app.route('/space/', methods=['get'])
 def number_of_astronauts():
     context = {'amount_of_asters': int(list(requests.get('http://api.open-notify.org/astros.json').json().values())[0])}
     return render_template('astors.html', **context)
