@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>List</title>
+    </head>
+    <body>
+        <ul>
+            {% for music in musics %}
+                <li>{{music[0]}}. {{music[1]}} - Автор:{{music[2]}}, Жанр:{{music[3]}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
