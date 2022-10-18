@@ -41,5 +41,24 @@ def add_tracks():
     return render_template('add_music.html', **context)
 
 
+@app.route('/del_music/', methods=['get', 'post'])
+def del_music():
+    context = {}
+    with sqlite3.connect('music_lib.sqlite3') as connection:
+        cursor = connection.cursor()
+        music = cursor.execute(
+            "SELECT music.name, author.name, genre.name FROM music JOIN author ON music.author_id = "
+            "author.id JOIN genre ON music.genre_id = genre.id")
+        context = {'musics': music.fetchall()}
+    if request.method == 'POST':
+        with sqlite3.connect('music_lib.sqlite3') as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                f"DELETE FROM music WHERE name='{request.form['name']}'"
+            )
+            connection.commit()
+    return render_template('del_music.html', **context)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

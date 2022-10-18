@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Del</title>
+    </head>
+    <body>
+        <form method="post">
+            <td>Enter the name of the song to be deleted:</td>
+                <input type="text" name="name">
+                <button type="submit">Del</button>
+            <table>
+                <ul>
+                    {% for music in musics %}
+                        <tr>
+                            <td>
+                                <li>
+                                    {{music[0]}} - Автор:{{music[1]}}, Жанр:{{music[2]}}
+                                </li>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </ul>
+            </table>
+        </form>
+    </body>
+</html>
